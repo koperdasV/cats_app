@@ -38,17 +38,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
   BottomNavigationBar _buildBottomNavBar() {
     return BottomNavigationBar(
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home, size: 32),
+          icon: Image(
+              image: const AssetImage('images/cats.png'),
+              color: _selectedTab == 0 ? Colors.blue : Colors.grey),
           label: 'Cats',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite_border, size: 32),
+          icon: Image(
+              image: const AssetImage('images/favorite.png'),
+              color: _selectedTab == 1 ? Colors.blue : Colors.grey),
           label: 'Favorite',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person, size: 32),
+          icon: Image(
+              image: const AssetImage('images/profile.png'),
+              color: _selectedTab == 2 ? Colors.blue : Colors.grey),
           label: 'Profile',
         ),
       ],

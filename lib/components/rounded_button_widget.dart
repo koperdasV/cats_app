@@ -5,10 +5,12 @@ import '../../constants.dart';
 class RoundedButtonWidget extends StatelessWidget {
   final Image img;
   final String text;
+  final VoidCallback onPressed;
   const RoundedButtonWidget({
     Key? key,
     required this.img,
     required this.text,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -17,9 +19,12 @@ class RoundedButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         style: ButtonStyle(
           padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),),
         ),
         child: Ink(
-          padding: const EdgeInsets.all(30),
+          padding: const EdgeInsets.all(25),
           decoration: kPrimaryButton,
           child: Row(
             children: [
@@ -39,7 +44,7 @@ class RoundedButtonWidget extends StatelessWidget {
             ],
           ),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
       ),
     );
   }

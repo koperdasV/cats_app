@@ -11,18 +11,13 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: ListView(
-        children: [
-          Column(
-            children: const [
-              SizedBox(height: 13),
-              CatsCardWidget(),
-              CatsCardWidget(),
-            ],
-          ),
-        ],
-      ),
+    return ListView.builder(
+      itemCount: 2,
+      itemBuilder: (context, int index) {
+        return const CatsCardWidget(
+          image: AssetImage('images/cat.png'),
+        );
+      },
     );
   }
 }

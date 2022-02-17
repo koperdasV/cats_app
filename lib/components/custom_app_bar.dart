@@ -13,7 +13,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         child: Container(
           child: const Center(
             child: Padding(
-              padding: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.only(top: 30),
               child: Image(image: AssetImage('images/logo.png')),
             ),
           ),

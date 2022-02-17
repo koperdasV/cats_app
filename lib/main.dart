@@ -1,4 +1,5 @@
 import 'package:cats_app/screen/Auth/auth.dart';
+import 'package:cats_app/screen/Details/details_screen.dart';
 import 'package:cats_app/screen/Favorite/favorite_screen.dart';
 import 'package:cats_app/screen/Home/home_screen.dart';
 import 'package:cats_app/screen/Profile/profile_screen.dart';
@@ -22,8 +23,9 @@ class MyApp extends StatelessWidget {
         '/profile': (context) => const ProfileScreen(),
         '/favorite': (context) => const FavoriteScreen(),
         '/splash': (context) => const SplashScreen(),
+        '/hero': (context) => const DetailsScreen()
       },
-      initialRoute: '/home',
+      initialRoute: '/auth',
     );
   }
 }

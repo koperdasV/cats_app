@@ -12,20 +12,17 @@ class CatsScreen extends StatefulWidget {
 class _CatsScreenState extends State<CatsScreen> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: ListView(
-        children: [
-          Column(
+    return ListView.builder(
+        itemCount: 5,
+        itemBuilder: (BuildContext context, int index) {
+          return Column(
             children: const [
-              SizedBox(height: 13),
-              CatsCardWidget(),
-              CatsCardWidget(),
-              CatsCardWidget(),
-              CatsCardWidget(),
+              CatsCardWidget(
+                image:
+                    AssetImage('images/cat.png'),
+              ),
             ],
-          ),
-        ],
-      ),
-    );
+          );
+        });
   }
 }
