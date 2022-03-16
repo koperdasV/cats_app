@@ -3,7 +3,6 @@ import 'package:cats_app/screen/Details/details_screen.dart';
 import 'package:cats_app/screen/Favorite/favorite_screen.dart';
 import 'package:cats_app/screen/Home/home_screen.dart';
 import 'package:cats_app/screen/Profile/profile_screen.dart';
-import 'package:cats_app/splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
