@@ -6,7 +6,6 @@ part 'cats.g.dart';
 class Cats {
   final String id;
   final String url;
-  
 
   Cats({
     required this.id,

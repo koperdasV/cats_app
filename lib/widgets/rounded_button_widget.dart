@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 
 class RoundedButtonWidget extends StatelessWidget {
-  final Image img;
+  final String image;
   final String text;
   final VoidCallback onPressed;
   const RoundedButtonWidget({
     Key? key,
-    required this.img,
+    required this.image,
     required this.text,
     required this.onPressed,
   }) : super(key: key);
@@ -19,16 +19,18 @@ class RoundedButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         style: ButtonStyle(
           padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
         ),
         child: Ink(
           padding: const EdgeInsets.all(25),
           decoration: kPrimaryButton,
           child: Row(
             children: [
-              img,
+              Image(image: AssetImage(image)),
               const SizedBox(width: 40),
               Flexible(
                 child: Text(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/components/rounded_button_widget.dart';
+import '/widgets/rounded_button_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -51,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 160),
               RoundedButtonWidget(
-                img: const Image(image: AssetImage('images/sign_out.png')),
+                image: 'images/sign_out.png',
                 text: 'Sign out',
                 onPressed: _signOut,
               )
