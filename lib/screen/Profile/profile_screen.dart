@@ -1,4 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../domain/provider/google_sign_in.dart';
+import '../../navigation/main_navigation.dart';
 import '/widgets/rounded_button_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -9,11 +14,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  void _signOut() {
-    Navigator.of(context).pushNamed('/auth');
-    setState(() {});
-  }
-
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,27 +24,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             children: [
               const SizedBox(height: 47),
-              Container(
-                width: 180,
-                height: 180,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: Colors.blue,
+              CachedNetworkImage(
+                imageUrl: user.photoURL!,
+                placeholder: (context, url) => const CircleAvatar(
+                  radius: 100,
+                ),
+                imageBuilder: (context, image) => CircleAvatar(
+                  backgroundImage: image,
+                  radius: 100,
                 ),
               ),
               const SizedBox(height: 32),
-              const Text(
-                'Мурчик Барсенко',
-                style: TextStyle(
+              Text(
+                user.displayName!,
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w400,
                   color: Colors.black,
                 ),
               ),
               const SizedBox(height: 14),
-              const Text(
-                'barsenkom@gmail.com',
-                style: TextStyle(
+              Text(
+                user.email!,
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
                   color: Color(0xFFAEAEAE),
@@ -53,7 +56,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               RoundedButtonWidget(
                 image: 'images/sign_out.png',
                 text: 'Sign out',
-                onPressed: _signOut,
+                onPressed: () {
+                  final provider =
+                      Provider.of<GoogleSignInProvider>(context, listen: false);
+                  provider.logOut();
+                  Navigator.of(context).pushNamed(MainNavigationRouteName.auth);
+                },
               )
             ],
           ),

@@ -1,6 +1,6 @@
-import 'package:cats_app/domain/entity/cats.dart';
+import 'package:cats_app/domain/provider/provider.dart';
+import 'package:cats_app/screen/Details/details_model.dart';
 import 'package:cats_app/widgets/custom_app_bar.dart';
-import 'package:cats_app/domain/entity/cat_fact.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -11,19 +11,20 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  final detailsListModel = DetailsModel();
+
+  @override
+  void initState() {
+    super.initState();
+
+    detailsListModel.loadFacts();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final Cats photos;
     return Scaffold(
       appBar: CustomAppBar(),
-      body: FutureBuilder<List<CatFact>>(
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return const Center(
-              child: Text('Сталася помилка!'),
-            );
-          } else if (snapshot.hasData) {
-            return Container(
+      body: Container(
               color: Colors.white,
               child: Column(
                 children: [
@@ -53,23 +54,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   const NameDetailsWidget(),
                   const SizedBox(height: 40),
                   Row(
-                    children:  const [
-                      DividerDetailsWidget(),
-                      // FactDetailsWidget(
-                      //   textFact: ,
-                      // ),
+                    children: [
+                      const DividerDetailsWidget(),
+                      NotifierProvider(
+                        model: detailsListModel,
+                        child: const FactDetailsWidget(),
+                      ),
                     ],
                   )
                 ],
               ),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
+            )
     );
   }
 }
@@ -112,18 +107,17 @@ class DividerDetailsWidget extends StatelessWidget {
 class FactDetailsWidget extends StatelessWidget {
   const FactDetailsWidget({
     Key? key,
-    required this.textFact,
   }) : super(key: key);
-
-  final CatFact textFact;
 
   @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<DetailsModel>(context);
+    if (model == null) return const SizedBox.shrink();
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.only(right: 31),
         child: Text(
-          textFact.fact,
+          model.catFact.toString(),
           overflow: TextOverflow.ellipsis,
           maxLines: 4,
           style: const TextStyle(

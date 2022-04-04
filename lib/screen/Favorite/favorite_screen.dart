@@ -15,7 +15,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       itemCount: 2,
       itemBuilder: (context, int index) {
         return const CatsCardWidget(
-          photos: [],
         );
       },
     );

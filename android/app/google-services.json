@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "365906560174",
+    "project_id": "catsapp-34d9b",
+    "storage_bucket": "catsapp-34d9b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365906560174:android:4c12e1c9910ff3cc72593f",
+        "android_client_info": {
+          "package_name": "com.example.cats_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365906560174-65s5v89t87i0jcsf2ttabc3ifck7k9h4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvou4z5UFXTYbEYv-_z9VEp7-ZYAW6PMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "365906560174-65s5v89t87i0jcsf2ttabc3ifck7k9h4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

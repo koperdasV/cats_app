@@ -13,12 +13,14 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  var selectedIndex = 0;
-  void handleItemSelected(int index) {
+  int _selectedTab = 0;
+
+  void onSelectedTab(int index) {
+    if (_selectedTab == index) return;
     setState(() {
-      selectedIndex = index;
+      _selectedTab = index;
     });
-    widget.onItemSelected;
+    widget.onItemSelected(index);
   }
 
   @override
@@ -33,22 +35,22 @@ class _BottomNavBarState extends State<BottomNavBar> {
             index: 0,
             image: 'images/cats.png',
             lable: 'Cats',
-            isSelected: (selectedIndex == 0),
-            onTap: handleItemSelected,
+            isSelected: (_selectedTab == 0),
+            onTap: onSelectedTab,
           ),
           _NavigationBarItem(
             index: 1,
             image: 'images/favorite.png',
             lable: 'Favorite',
-            isSelected: (selectedIndex == 1),
-            onTap: handleItemSelected,
+            isSelected: (_selectedTab == 1),
+            onTap: onSelectedTab,
           ),
           _NavigationBarItem(
             index: 2,
             image: 'images/profile.png',
             lable: 'Profile',
-            isSelected: (selectedIndex == 2),
-            onTap: handleItemSelected,
+            isSelected: (_selectedTab == 2),
+            onTap: onSelectedTab,
           ),
         ],
       ),

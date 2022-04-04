@@ -1,35 +1,34 @@
-import 'package:cats_app/domain/entity/cats.dart';
-import 'package:cats_app/pages/details_screen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
+import '../domain/provider/provider.dart';
+import '../screen/Cats/cats_model.dart';
 
 class CatsCardWidget extends StatelessWidget {
   const CatsCardWidget({
     Key? key,
-    required this.photos,
   }) : super(key: key);
-  final List<Cats> photos;
 
   @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.watch<CatsModel>(context);
+    if (model == null) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: photos.length,
+      itemCount: model.cats.length,
       itemBuilder: (context, index) {
+        model.showedCatsAtIndex(index);
+        final cat = model.cats[index];
         return InkWell(
           splashColor: Colors.red,
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: ((context) => const DetailsScreen())));
-          },
+          onTap: () => model.onCatsTap(context, index),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 13, horizontal: 20),
             child: SizedBox(
               child: Stack(
                 alignment: Alignment.bottomRight,
                 children: [
-                  Center(
-                    child: Image.network(photos[index].url),
+                  CachedNetworkImage(
+                    imageUrl: cat.url,
                   ),
                   IconButton(
                     icon: const Icon(Icons.favorite_border),
