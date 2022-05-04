@@ -9,15 +9,14 @@ import 'package:http/http.dart' as http;
 
 class ApiClient {
   final client = http.Client();
-  static const host = 'https://api.thecatapi.com/v1/images/search?limit=10';
-  static const hostFact = 'https://catfact.ninja/facts';
-  static const apiKey = '13735389-3ecb-45d7-82f8-efc5cfc4ac61';
-  static const apiKeyFact = 'axFUBfdnqAYHyE8v8lV16xoZ1KcFGBXV7flz4w2B';
+  static const host = 'https://api.thecatapi.com/v1';
 
   Future<List<Cats>> getPosts(http.Client client) async {
     final response = await client.get(
-      Uri.parse(host),
-      headers: {HttpHeaders.authorizationHeader: apiKey},
+      Uri.parse('$host/images/search?limit=10'),
+      headers: {
+        HttpHeaders.authorizationHeader: '13735389-3ecb-45d7-82f8-efc5cfc4ac61'
+      },
     );
     return compute(parsePhotos, response.body);
   }
@@ -30,8 +29,11 @@ class ApiClient {
 
   Future<List<CatFact>> getFacts(http.Client client) async {
     final response = await client.get(
-      Uri.parse(hostFact),
-      headers: {HttpHeaders.authorizationHeader: apiKeyFact},
+      Uri.parse('https://catfact.ninja/facts'),
+      headers: {
+        HttpHeaders.authorizationHeader:
+            'axFUBfdnqAYHyE8v8lV16xoZ1KcFGBXV7flz4w2B'
+      },
     );
     return compute(parseFacts, response.body);
   }
@@ -45,4 +47,25 @@ class ApiClient {
         .map((json) => CatFact.fromJson(json.cast<String, dynamic>()))
         .toList();
   }
+
+  // Future<bool> isFavorite() async {
+  //   final response = await client.get(
+  //     Uri.parse('$host/favourites'),
+  //     headers: {
+  //       HttpHeaders.authorizationHeader: '13735389-3ecb-45d7-82f8-efc5cfc4ac61'
+  //     },
+  //   );
+  //   return compute()
+  // }
+
+  // Future<String> markAsFavorite() async {
+  //   final response = await client.post(
+  //     Uri.parse('$host/favourites'),
+  //     headers: {
+  //       HttpHeaders.authorizationHeader: '13735389-3ecb-45d7-82f8-efc5cfc4ac61'
+  //     },
+  //     body: ("image_id": "",
+  //     "sub_id": "",)
+  //   );
+  // }
 }

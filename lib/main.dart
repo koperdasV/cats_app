@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
-        home: const AuthScreen(),
+        home: const MainScreenWidget(),
         routes: mainNavigation.routes,
-        // initialRoute: mainNavigation.initialRoute(false),
+        initialRoute: mainNavigation.initialRoute(false),
       ),
     );
   }

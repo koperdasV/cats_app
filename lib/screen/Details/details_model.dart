@@ -4,11 +4,12 @@ import 'package:flutter/cupertino.dart';
 
 class DetailsModel extends ChangeNotifier {
   final _apiClient = ApiClient();
-  var _catFact = <CatFact>[];
+  final _catFact = <CatFact>[];
   List<CatFact> get catFact => List.unmodifiable(_catFact);
 
   Future<void> loadFacts() async {
-    _catFact = await _apiClient.getFacts(ApiClient().client);
+    final factResponse = await _apiClient.getFacts(ApiClient().client);
+    _catFact.addAll(factResponse);
     notifyListeners();
   }
 }

@@ -18,7 +18,7 @@ class _CatsScreenState extends State<CatsScreen> {
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return const Center(
-            child: Text('Сталася помилка!'),
+            child: CatsCardWidget()
           );
         } else if (snapshot.hasData) {
           return const CatsCardWidget();

@@ -26,6 +26,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   void initState() {
     super.initState();
     catsListModel.loadCats();
+    catsListModel.loadFacts();
   }
 
   @override

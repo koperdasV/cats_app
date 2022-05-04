@@ -25,7 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               const SizedBox(height: 47),
               CachedNetworkImage(
-                imageUrl: user.photoURL!,
+                imageUrl: user.photoURL ?? '',
                 placeholder: (context, url) => const CircleAvatar(
                   radius: 100,
                 ),
@@ -36,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 32),
               Text(
-                user.displayName!,
+                user.displayName ?? '',
                 style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w400,
@@ -45,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 14),
               Text(
-                user.email!,
+                user.email ?? '',
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
