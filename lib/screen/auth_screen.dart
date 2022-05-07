@@ -1,8 +1,8 @@
-import 'package:cats_app/navigation/main_navigation.dart';
+import 'package:cats_app/domain/provider/google_sign_in.dart';
+import 'package:cats_app/screen/screens.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../domain/provider/google_sign_in.dart';
 import '/widgets/rounded_button_widget.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -13,6 +13,7 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  bool isSigningIn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +37,24 @@ class _AuthScreenState extends State<AuthScreen> {
                 RoundedButtonWidget(
                   image: 'images/google.png',
                   text: 'Login with Google',
-                  onPressed: () {
-                    final provider = Provider.of<GoogleSignInProvider>(context,
-                        listen: false);
-                    provider.gooogleSignIn();
-                    Navigator.of(context)
-                        .pushNamed(MainNavigationRouteName.home);
+                  onPressed: () async {
+                    setState(() {
+                      isSigningIn = true;
+                    });
+                    GoogleSignInProvider service = GoogleSignInProvider();
+                    try {
+                      await service.gooogleSignIn();
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const MainScreenWidget(),
+                      ));
+                    } catch (e) {
+                      if (e is FirebaseAuthException) {
+                        showMessage(e.message!);
+                      }
+                    }
+                    setState(() {
+                      isSigningIn = false;
+                    });
                   },
                 ),
               ],
@@ -50,5 +63,24 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
       ),
     );
+  }
+
+  void showMessage(String message) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content: Text(message),
+            actions: [
+              TextButton(
+                child: const Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
   }
 }

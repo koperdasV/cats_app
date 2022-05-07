@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cats_app/domain/provider/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../domain/provider/google_sign_in.dart';
 import '../../navigation/main_navigation.dart';
 import '/widgets/rounded_button_widget.dart';
 
@@ -14,7 +13,13 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final user = FirebaseAuth.instance.currentUser!;
+  User? user = FirebaseAuth.instance.currentUser;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               const SizedBox(height: 47),
               CachedNetworkImage(
-                imageUrl: user.photoURL ?? '',
+                imageUrl: user!.photoURL ?? '',
                 placeholder: (context, url) => const CircleAvatar(
                   radius: 100,
                 ),
@@ -36,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 32),
               Text(
-                user.displayName ?? '',
+                user!.displayName ?? '',
                 style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w400,
@@ -45,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 14),
               Text(
-                user.email ?? '',
+                user!.email ?? '',
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
@@ -56,13 +61,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               RoundedButtonWidget(
                 image: 'images/sign_out.png',
                 text: 'Sign out',
-                onPressed: () {
-                  final provider =
-                      Provider.of<GoogleSignInProvider>(context, listen: false);
-                  provider.logOut();
+                onPressed: () async {
+                  GoogleSignInProvider service = GoogleSignInProvider();
+                  await service.signOut();
                   Navigator.of(context).pushNamed(MainNavigationRouteName.auth);
                 },
-              )
+              ),
             ],
           ),
         ),

@@ -1,4 +1,6 @@
+import 'package:cats_app/landing_page.dart';
 import 'package:cats_app/navigation/main_navigation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'screen/screens.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +20,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //User? user = FirebaseAuth.instance.currentUser;
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
-        home: const MainScreenWidget(),
+        debugShowCheckedModeBanner: false,
+        home: const LandingPage(),
         routes: mainNavigation.routes,
-        initialRoute: mainNavigation.initialRoute(false),
       ),
     );
   }

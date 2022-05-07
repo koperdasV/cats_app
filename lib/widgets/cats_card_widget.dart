@@ -15,9 +15,7 @@ class CatsCardWidget extends StatelessWidget {
     final model = NotifierProvider.watch<CatsModel>(context);
     if (model == null) return const SizedBox.shrink();
     return ListView.builder(
-      // ignore: todo
-      //TODO змінити індекси(помилка)
-      itemCount: model.catFact.length,
+      itemCount: model.catFact.length & model.cats.length,
       itemBuilder: (context, index) {
         model.showedCatsAtIndex(index);
         model.showedFactAtIndex(index);
@@ -48,7 +46,9 @@ class CatsCardWidget extends StatelessWidget {
                   ),
                   IconButton(
                     icon: const Icon(Icons.favorite_border),
-                    onPressed: () {},
+                    onPressed: () {
+                      addItem();
+                    },
                     iconSize: 32,
                     color: Colors.red,
                   ),
@@ -60,4 +60,6 @@ class CatsCardWidget extends StatelessWidget {
       },
     );
   }
+
+  void addItem() {}
 }
