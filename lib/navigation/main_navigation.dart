@@ -17,7 +17,7 @@ class MainNavigation {
   final routes = <String, Widget Function(BuildContext)>{
     MainNavigationRouteName.auth: (context) => const AuthScreen(),
     MainNavigationRouteName.home: (context) => const MainScreenWidget(),
-    MainNavigationRouteName.profile: (context) => const ProfileScreen(),
+    MainNavigationRouteName.profile: (context) => ProfileScreen(),
     MainNavigationRouteName.favorite: (context) => const FavoriteScreen(),
     MainNavigationRouteName.details: (context) => const DetailsScreen(),
   };

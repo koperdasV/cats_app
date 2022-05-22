@@ -52,7 +52,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                       NotifierProvider(
                           model: catsListModel, child: const CatsScreen()),
                       const FavoriteScreen(),
-                      const ProfileScreen(),
+                      ProfileScreen(),
                     ],
                   );
                 });

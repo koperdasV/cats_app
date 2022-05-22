@@ -25,7 +25,7 @@ class _CatsCardWidgetState extends State<CatsCardWidget> {
     final model = NotifierProvider.watch<CatsModel>(context);
     if (model == null) return const SizedBox.shrink();
     return ListView.builder(
-      itemCount: model.catFact.length & model.cats.length,
+      itemCount: model.cats.length & model.catFact.length,
       itemBuilder: (context, index) {
         model.showedCatsAtIndex(index);
         model.showedFactAtIndex(index);

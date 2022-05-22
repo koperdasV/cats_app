@@ -29,7 +29,7 @@ class ApiClient {
 
   Future<List<CatFact>> getFacts(http.Client client) async {
     final response = await client.get(
-      Uri.parse('https://catfact.ninja/facts'),
+      Uri.parse('https://catfact.ninja/facts?limit=10'),
       headers: {
         HttpHeaders.authorizationHeader:
             'axFUBfdnqAYHyE8v8lV16xoZ1KcFGBXV7flz4w2B'
