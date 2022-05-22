@@ -3,7 +3,7 @@ import 'package:cats_app/screen/auth_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../bloc/auth_bloc.dart';
+import '../../bloc/auth_bloc/auth_bloc.dart';
 import '/widgets/rounded_button_widget.dart';
 
 class ProfileScreen extends StatelessWidget {

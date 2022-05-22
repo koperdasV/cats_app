@@ -1,4 +1,4 @@
-import 'package:cats_app/bloc/auth_bloc.dart';
+import 'package:cats_app/bloc/auth_bloc/auth_bloc.dart';
 import 'package:cats_app/landing_page.dart';
 import 'package:cats_app/navigation/main_navigation.dart';
 import 'package:firebase_core/firebase_core.dart';
