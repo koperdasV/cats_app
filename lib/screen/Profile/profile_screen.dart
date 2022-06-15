@@ -18,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is UnAuthenticated) {
             Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => const AuthScreen()),
+                MaterialPageRoute(builder: (context) => AuthScreen()),
                 ((route) => false));
           }
         },

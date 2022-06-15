@@ -1,4 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'package:cats_app/screen/main_screen_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,7 +54,7 @@ class AuthScreen extends StatelessWidget {
                       RoundedButtonWidget(
                         image: 'images/google.png',
                         text: 'Login with Google',
-                        onPressed: () {
+                        onPressed: () async {
                           _authenticateWithGoogle(context);
                         },
                       ),

@@ -11,7 +11,7 @@ class ApiClient {
   final client = http.Client();
   static const host = 'https://api.thecatapi.com/v1';
 
-  Future<List<Cats>> getPosts(http.Client client) async {
+  Future<List<Cats>> getCats(http.Client client) async {
     final response = await client.get(
       Uri.parse('$host/images/search?limit=10'),
       headers: {
@@ -47,25 +47,4 @@ class ApiClient {
         .map((json) => CatFact.fromJson(json.cast<String, dynamic>()))
         .toList();
   }
-
-  // Future<bool> isFavorite() async {
-  //   final response = await client.get(
-  //     Uri.parse('$host/favourites'),
-  //     headers: {
-  //       HttpHeaders.authorizationHeader: '13735389-3ecb-45d7-82f8-efc5cfc4ac61'
-  //     },
-  //   );
-  //   return compute()
-  // }
-
-  // Future<String> markAsFavorite() async {
-  //   final response = await client.post(
-  //     Uri.parse('$host/favourites'),
-  //     headers: {
-  //       HttpHeaders.authorizationHeader: '13735389-3ecb-45d7-82f8-efc5cfc4ac61'
-  //     },
-  //     body: ("image_id": "",
-  //     "sub_id": "",)
-  //   );
-  // }
 }

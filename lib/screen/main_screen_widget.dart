@@ -1,11 +1,12 @@
 import 'package:cats_app/domain/provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'Cats/cats_model.dart';
+import '../domain/model/cats_model.dart';
 import 'screens.dart';
 import 'package:cats_app/widgets/bottom_nav_bar_widget.dart';
 import 'package:flutter/material.dart';
 import '/widgets/custom_app_bar.dart';
+
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
@@ -25,8 +26,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   @override
   void initState() {
     super.initState();
-    catsListModel.loadCats();
-    catsListModel.loadFacts();
+    catsListModel.loadData();
   }
 
   @override

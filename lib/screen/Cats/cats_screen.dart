@@ -14,7 +14,7 @@ class _CatsScreenState extends State<CatsScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Cats>>(
-      future: ApiClient().getPosts(ApiClient().client),
+      future: ApiClient().getCats(ApiClient().client),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return const Center(

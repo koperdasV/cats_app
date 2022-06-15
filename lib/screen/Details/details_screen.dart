@@ -1,4 +1,6 @@
 import 'package:cats_app/widgets/custom_app_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/divider_widget.dart';
@@ -18,26 +20,35 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          child: Column(
-            children: [
-              ImageWidget(image: image),
-              const SizedBox(height: 27),
-              const NameDetailsWidget(),
-              const SizedBox(height: 40),
-              Row(
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+            .collection("users-fav-items")
+            .doc(FirebaseAuth.instance.currentUser!.email)
+            .collection("items")
+            .snapshots(),
+      builder: (context, snapshot) {
+        return Scaffold(
+          appBar: CustomAppBar(),
+          body: SingleChildScrollView(
+            child: SizedBox(
+              child: Column(
                 children: [
-                  const DividerDetailsWidget(),
-                  FactWidget(fact: fact!),
+                  ImageWidget(image: image),
+                  const SizedBox(height: 27),
+                  const NameDetailsWidget(),
+                  const SizedBox(height: 40),
+                  Row(
+                    children: [
+                      const DividerDetailsWidget(),
+                      FactWidget(fact: fact!),
+                    ],
+                  )
                 ],
-              )
-            ],
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      }
     );
   }
 }

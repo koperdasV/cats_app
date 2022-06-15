@@ -25,6 +25,7 @@ class RoundedButtonWidget extends StatelessWidget {
             ),
           ),
         ),
+        onPressed: onPressed,
         child: Ink(
           padding: const EdgeInsets.all(25),
           decoration: kPrimaryButton,
@@ -46,7 +47,6 @@ class RoundedButtonWidget extends StatelessWidget {
             ],
           ),
         ),
-        onPressed: onPressed,
       ),
     );
   }

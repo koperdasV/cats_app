@@ -11,13 +11,13 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return PreferredSize(
         preferredSize: const Size.fromHeight(68),
         child: Container(
+          decoration: kPrimaryColor,
           child: const Center(
             child: Padding(
               padding: EdgeInsets.only(top: 30),
               child: Image(image: AssetImage('images/logo.png')),
             ),
           ),
-          decoration: kPrimaryColor,
         ));
   }
 
